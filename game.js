@@ -42,9 +42,11 @@ function update () {
 
   player.update()
   if (touchX !== null) {
-		if (isShoot) {
-			player.isShoot = isShoot
-		} else {
+		if (isShoot && player.isShoot != isShoot) {
+			player.shoot()
+		}
+		player.isShoot = isShoot
+		if (!player.isShoot) {
 	    player.x = touchX
 	    player.y = touchY
 		}		
