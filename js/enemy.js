@@ -87,6 +87,17 @@ export default class Enemy extends cax.Group {
 
   update () {
     this.y += this.speed
+		//TODO currently fly to the right
+		if (this.x < info.screenWidth) {
+			this.x += (this.speed / 2)
+			if (this.rotation > -45) {
+					this.rotation -= 0.25
+			}
+		} else {
+			if (this.rotation < 0) {
+				this.rotation += 0.25
+			}
+		}
     if (this.y > screenHeight) {
       this.destroy()
     }
