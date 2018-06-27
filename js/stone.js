@@ -7,11 +7,11 @@ const screenWidth = info.windowWidth
 const screenHeight = info.windowHeight
 
 // 玩家相关常量设置
-const PLAYER_IMG_SRC = 'images/hero.png'
-const IMG_WIDTH = 186
-const IMG_HEIGHT = 130
+const PLAYER_IMG_SRC = 'images/Fireball-Stone.png'
+const IMG_WIDTH = 64
+const IMG_HEIGHT = 64
 
-export default class Player extends cax.Group {
+export default class Stone extends cax.Group {
   constructor (ctx) {
     super()
     this.music = new Music()
@@ -52,6 +52,7 @@ export default class Player extends cax.Group {
 				var originX = screenWidth / 2
 				var originY = screenHeight - 120
 				var theta = Math.atan((originY - this.y) / (originX - this.x))
+				//Range compensation
 				if (originX - this.x < 0) {
 					theta = Math.PI + theta
 				}
@@ -67,6 +68,10 @@ export default class Player extends cax.Group {
 			this.x += this.speedX
       this.y += (this.speedY + (gravity * seconds))
 		}
+		
+    if (this.y > screenHeight) {
+      this.destroy()
+    }
   }
 
   isCollideWith (sp) {
