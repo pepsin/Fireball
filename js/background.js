@@ -25,15 +25,15 @@ export default class BackGround extends cax.Group {
   }
 
   update () {
-    this.bgDown.y += 2
-    this.bgUp.y += 2
-
-    if (this.bgUp.y >= screenHeight) {
-      this.bgUp.y = this.bgDown.y - screenHeight
-    }
-
-    if (this.bgDown.y >= screenHeight) {
-      this.bgDown.y = this.bgUp.y - screenHeight
-    }
+    // this.bgDown.y += 2
+    // this.bgUp.y += 2
+    //
+    // if (this.bgUp.y >= screenHeight) {
+    //   this.bgUp.y = this.bgDown.y - screenHeight
+    // }
+    //
+    // if (this.bgDown.y >= screenHeight) {
+    //   this.bgDown.y = this.bgUp.y - screenHeight
+    // }
   }
 }
