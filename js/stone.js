@@ -18,6 +18,8 @@ export default class Stone extends cax.Group {
     this.bitmap = new cax.Bitmap(PLAYER_IMG_SRC)
     this.bitmap.originX = IMG_WIDTH / 2
     this.bitmap.originY = IMG_HEIGHT / 2
+		this.width = IMG_WIDTH / 2
+		this.height = IMG_WIDTH / 2
 
     this.add(this.bitmap)
     this.x = screenWidth / 2
@@ -43,7 +45,6 @@ export default class Stone extends cax.Group {
 			var originY = screenHeight - 120
 			var x = Math.max(0, Math.min(screenWidth, this.x));
 			var y = Math.max(0, Math.min(screenHeight, this.y));
-			console.log(x, y)
 			var theta = Math.atan((originY - y) / (originX - x))
 			this.rotationDeltaWhenFlying = 1
 			//Range compensation
@@ -61,7 +62,6 @@ export default class Stone extends cax.Group {
 	    if (this.y > (screenHeight + destroyPadding) ||
 					this.x > (screenWidth + destroyPadding) ||
 				  this.x < -destroyPadding) {
-				console.log("Destroy")
 	      this.destroy()
 	    }
 		}
@@ -91,7 +91,6 @@ export default class Stone extends cax.Group {
   isCollideWith (sp) {
     let spX = sp.x + sp.width / 2
     let spY = sp.y + sp.height / 2
-
     return !!(spX >= this.x &&
             spX <= this.x + this.width &&
             spY >= this.y &&

@@ -78,13 +78,10 @@ function update () {
   enemyGroup.children.forEach(enemy => {
 		stoneGroup.children.forEach(stone => {
 			if (stone.isShoot) {
-		    stone.bulletGroup.children.forEach(bullet => {
-		      if (bullet.isCollideWith(enemy)) {
-		        bullet.visible = false
-		        enemy.explode()
-		        music.playExplosion()
-		      }
-		    })
+	      if (stone.isCollideWith(enemy)) {
+	        enemy.explode()
+	        music.playExplosion()
+	      }
 			}
 		})
   })

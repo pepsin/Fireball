@@ -6,6 +6,7 @@ const IMG_WIDTH = 120
 const IMG_HEIGHT = 79
 
 const info = wx.getSystemInfoSync()
+const screenWidth = info.windowWidth
 const screenHeight = info.windowHeight
 
 export default class Enemy extends cax.Group {
@@ -21,7 +22,7 @@ export default class Enemy extends cax.Group {
 
     this.width = IMG_WIDTH / 2
     this.height = IMG_WIDTH / 2
-
+		this.targetX = Math.random() * screenWidth
     this.spriteOption = {
       framerate: 20,
       imgs: [
@@ -87,13 +88,13 @@ export default class Enemy extends cax.Group {
 
   update () {
     this.y += this.speed
-		//TODO currently fly to the right
-		if (this.x < info.screenWidth) {
+		if (this.x < this.targetX) {
 			this.x += (this.speed / 2)
 			if (this.rotation > -45) {
 					this.rotation -= 0.25
 			}
 		} else {
+			this.x -= this.speed / 2
 			if (this.rotation < 0) {
 				this.rotation += 0.25
 			}
