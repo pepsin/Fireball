@@ -36,10 +36,35 @@ export default class Stone extends cax.Group {
   }
 	
 	shoot () {
-		this.shootAngle = 0
-		this.speedY = 0
-		this.speedX = 0
-		this.frames = 0
+		this.isShoot = true
+		console.log("Shoot")
+		if (this.shootAngle == 0) {
+			var originX = screenWidth / 2
+			var originY = screenHeight - 120
+			var x = Math.max(0, Math.min(screenWidth, this.x));
+			var y = Math.max(0, Math.min(screenHeight, this.y));
+			console.log(x, y)
+			var theta = Math.atan((originY - y) / (originX - x))
+			this.rotationDeltaWhenFlying = 1
+			//Range compensation
+			if (originX - x < 0) {
+				theta = Math.PI + theta
+				this.rotationDeltaWhenFlying = -1
+			}
+			this.shootAngle = theta
+		}
+	}
+	
+	destroyIfNeeded () {
+		var destroyPadding = 200
+		if (this.isShoot) {
+	    if (this.y > (screenHeight + destroyPadding) ||
+					this.x > (screenWidth + destroyPadding) ||
+				  this.x < -destroyPadding) {
+				console.log("Destroy")
+	      this.destroy()
+	    }
+		}
 	}
 
   update () {
@@ -48,20 +73,7 @@ export default class Stone extends cax.Group {
       this.preShootTime = this.currentTime
     }
 			
-		if (this.isShoot) {
-			if (this.shootAngle == 0) {
-				var originX = screenWidth / 2
-				var originY = screenHeight - 120
-				var theta = Math.atan((originY - this.y) / (originX - this.x))
-				this.rotationDeltaWhenFlying = 1
-				//Range compensation
-				if (originX - this.x < 0) {
-					theta = Math.PI + theta
-					this.rotationDeltaWhenFlying = -1
-				}
-				this.shootAngle = theta
-			}
-			
+		if (this.isShoot) {			
 			this.frames += 1
 			var seconds = this.frames / 60
 			var speed = 14
@@ -73,13 +85,9 @@ export default class Stone extends cax.Group {
 			this.rotation += this.rotationDeltaWhenFlying
 		}
 		
-    if (this.y > screenHeight ||
-				this.x > screenWidth ||
-			  this.x < 0) {
-      this.destroy()
-    }
+		this.destroyIfNeeded()
   }
-
+	
   isCollideWith (sp) {
     let spX = sp.x + sp.width / 2
     let spY = sp.y + sp.height / 2

@@ -39,6 +39,7 @@ wx.onTouchMove(function (e) {
 })
 
 wx.onTouchEnd(function (e) {
+	console.log("End")
 	touchMoved = false
 	isShoot = true
 })
@@ -66,7 +67,10 @@ function update () {
 		stoneGroup.generate()
 	}
 	if (touchMoved) {
+		console.log(touchMoveX, touchMoveY)
 		stoneGroup.updateCurrentPosition(touchMoveX, touchMoveY)
+		touchMoveX = 0
+		touchMoveY = 0
 	}
 	stoneGroup.update()
   enemyGroup.update()
