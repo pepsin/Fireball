@@ -3,7 +3,7 @@ import cax from './libs/cax'
 const ENEMY_IMG_SRC = 'images/enemy.png'
 
 const IMG_WIDTH = 120
-const IMG_HEIGHT = 79
+const IMG_HEIGHT = 180
 
 const info = wx.getSystemInfoSync()
 const screenWidth = info.windowWidth
@@ -84,6 +84,7 @@ export default class Enemy extends cax.Group {
     es.x = this.x - 32
     es.y = this.y - 24
     this.parent.parent.add(es)
+		this.destroy()
   }
 
   update () {

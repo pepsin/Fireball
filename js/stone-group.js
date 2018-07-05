@@ -17,8 +17,6 @@ export default class StoneGroup extends cax.Group {
 
   generate () {
     const p = new Stone()
-		p.x = screenWidth / 2
-		p.y = screenHeight - 120
 		this.current = p
     this.add(p)
   }

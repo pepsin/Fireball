@@ -5,6 +5,8 @@ import Music from './music'
 const info = wx.getSystemInfoSync()
 const screenWidth = info.windowWidth
 const screenHeight = info.windowHeight
+const originX = screenWidth / 2
+const originY = screenHeight / 3 * 2
 
 // 玩家相关常量设置
 const PLAYER_IMG_SRC = 'images/Fireball-Stone.png'
@@ -22,8 +24,8 @@ export default class Stone extends cax.Group {
 		this.height = IMG_WIDTH / 2
 
     this.add(this.bitmap)
-    this.x = screenWidth / 2
-    this.y = screenHeight - 120
+    this.x = originX
+    this.y = originY
 
     this.scaleX = this.scaleY = 0.5
 
@@ -41,8 +43,6 @@ export default class Stone extends cax.Group {
 		this.isShoot = true
 		console.log("Shoot")
 		if (this.shootAngle == 0) {
-			var originX = screenWidth / 2
-			var originY = screenHeight - 120
 			var x = Math.max(0, Math.min(screenWidth, this.x));
 			var y = Math.max(0, Math.min(screenHeight, this.y));
 			var theta = Math.atan((originY - y) / (originX - x))
@@ -76,7 +76,7 @@ export default class Stone extends cax.Group {
 		if (this.isShoot) {			
 			this.frames += 1
 			var seconds = this.frames / 60
-			var speed = 14
+			var speed = 16
 			var gravity = 10
 			this.speedX = Math.cos(this.shootAngle) * speed
 			this.speedY = Math.sin(this.shootAngle) * speed
@@ -89,11 +89,15 @@ export default class Stone extends cax.Group {
   }
 	
   isCollideWith (sp) {
-    let spX = sp.x + sp.width / 2
-    let spY = sp.y + sp.height / 2
-    return !!(spX >= this.x &&
-            spX <= this.x + this.width &&
-            spY >= this.y &&
-            spY <= this.y + this.height)
+    let spX = sp.x + sp.width
+    let spY = sp.y + sp.height
+
+		if (this.x <= spX &&
+				this.x + this.width >= sp.x &&
+				this.y <= spY &&
+				this.y + this.height >= sp.y) {
+					return true
+		}
+		return false
   }
 }
