@@ -3,17 +3,20 @@ import Background from './js/background'
 import Stone from './js/stone'
 import EnemyGroup from './js/enemy-group'
 import StoneGroup from './js/stone-group'
+import FlowerGroup from './js/flower-group'
 import Music from './js/music'
+import Flower from './js/flower'
 
 const bg = new Background()
 const stoneGroup = new StoneGroup()
 const stage = new cax.Stage()
+const flowerGroup = new FlowerGroup()
 const enemyGroup = new EnemyGroup()
 const music = new Music()
 const info = wx.getSystemInfoSync()
 const screenHeight = info.windowHeight
 
-stage.add(bg, enemyGroup, stoneGroup)
+stage.add(bg, enemyGroup, stoneGroup, flowerGroup)
 
 // stage.add(player.bulletGroup)
 
@@ -39,7 +42,6 @@ wx.onTouchMove(function (e) {
 })
 
 wx.onTouchEnd(function (e) {
-	console.log("End")
 	touchMoved = false
 	isShoot = true
 })
@@ -48,17 +50,6 @@ function update () {
   stage.update()
   bg.update()
 
-  // player.update()
-  // if (touchX !== null) {
-  // 		if (isShoot && player.isShoot != isShoot) {
-  // 			player.shoot()
-  // 		}
-  // 		player.isShoot = isShoot
-  // 		if (!player.isShoot) {
-  // 	    player.x = touchX
-  // 	    player.y = touchY
-  // 		}
-  // }
 	if (isShoot) {
 		stoneGroup.shoot()
 		isShoot = false
@@ -66,8 +57,11 @@ function update () {
 	if (stoneGroup.children.length == 0) {
 		stoneGroup.generate()
 	}
+	if (flowerGroup.children.length == 0) {
+		flowerGroup.generateAll()
+		flowerGroup.animateAll()
+	}
 	if (touchMoved) {
-		console.log(touchMoveX, touchMoveY)
 		stoneGroup.updateCurrentPosition(touchMoveX, touchMoveY)
 		touchMoveX = 0
 		touchMoveY = 0

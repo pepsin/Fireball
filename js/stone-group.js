@@ -22,8 +22,9 @@ export default class StoneGroup extends cax.Group {
   }
 	
 	shoot () {
-		this.current.shoot()
-		this.generate()
+		if (this.current.shoot()) {
+			this.generate()
+		}
 	}
 
 	updateCurrentPosition (deltaX, deltaY) {
