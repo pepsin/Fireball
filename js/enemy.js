@@ -1,9 +1,9 @@
 import cax from './libs/cax'
 
-const ENEMY_IMG_SRC = 'images/enemy.png'
+const ENEMY_IMG_PREFIX = 'images/fire_'
 
-const IMG_WIDTH = 120
-const IMG_HEIGHT = 180
+const IMG_WIDTH = 150
+const IMG_HEIGHT = 140
 
 const info = wx.getSystemInfoSync()
 const screenWidth = info.windowWidth
@@ -12,12 +12,13 @@ const screenHeight = info.windowHeight
 export default class Enemy extends cax.Group {
   constructor () {
     super()
-    this.bitmap = new cax.Bitmap(ENEMY_IMG_SRC)
+		var index = Math.ceil(Math.random() * 10000) % 3
+    this.bitmap = new cax.Bitmap(ENEMY_IMG_PREFIX + index + ".png")
     this.bitmap.originX = IMG_WIDTH / 2
     this.bitmap.originY = IMG_HEIGHT / 2
     this.add(this.bitmap)
 
-    this.scaleX = this.scaleY = 0.5
+    this.scaleX = this.scaleY = 0.4
     this.speed = 1
 
     this.width = IMG_WIDTH / 2

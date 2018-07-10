@@ -11,18 +11,16 @@ export default class FlowerGroup extends cax.Group {
   }
 	
 	generateAll() {
-		for (var i = 0; i < 4; i++) {
-	    const e = new Flower()
-	    e.x = screenWidth / 4 * i
-	    e.y = screenHeight - 128
+		for (var i = 0; i < 3; i++) {
+	    var e = new Flower(i)
+	    e.x = screenWidth / 3 * i
+	    e.y = screenHeight - e.height
 	    this.add(e)
 		}
 	}
 	
 	animateAll() {
-		this.children.forEach(flower => {
-			flower.animate()
-		})
+
 	}
 
   generate () {
