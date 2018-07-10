@@ -26,6 +26,7 @@ let isShoot = false
 let touchMoved = false
 let touchMoveX = 0
 let touchMoveY = 0
+let score = 0
 
 wx.onTouchStart(function (e) {
 	isShoot = false
@@ -74,12 +75,14 @@ function update () {
 			if (stone.isShoot) {
 	      if (stone.isCollideWith(enemy)) {
 	        enemy.explode()
+					score += 10 * stone.combo
+					stone.combo += 1
 	        music.playExplosion()
 	      }
 			}
 		})
   })
-
+	console.log("Score: " + score)
   requestAnimationFrame(update)
 }
 

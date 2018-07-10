@@ -38,6 +38,7 @@ export default class Stone extends cax.Group {
 		this.speedY = 0
 		this.shootAngle = 0
 		this.rotationDeltaWhenFlying = 0
+		this.combo = 1
   }
 	
 	shoot () {
