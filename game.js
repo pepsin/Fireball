@@ -56,7 +56,7 @@ function update () {
 		isShoot = false
 	}
 	if (stoneGroup.children.length == 0) {
-		stoneGroup.generate()
+			stoneGroup.generate()
 	}
 	if (flowerGroup.children.length == 0) {
 		flowerGroup.generateAll()

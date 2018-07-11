@@ -9,7 +9,7 @@ const originX = screenWidth / 2
 const originY = screenHeight / 3 * 2
 
 // 玩家相关常量设置
-const PLAYER_IMG_PREFIX = 'images/Fireball-Stone'
+const PLAYER_IMG_PREFIX = 'images/stone_'
 const IMG_WIDTH = 64
 const IMG_HEIGHT = 64
 
@@ -17,8 +17,8 @@ export default class Stone extends cax.Group {
   constructor (ctx) {
     super()
     this.music = new Music()
-		var index = Math.ceil(Math.random() * 2)
-    this.bitmap = new cax.Bitmap(PLAYER_IMG_PREFIX + "-" + index + ".png")
+		var index = Math.ceil(Math.random() * 10000) % 3
+    this.bitmap = new cax.Bitmap(PLAYER_IMG_PREFIX + index + ".png")
     this.bitmap.originX = IMG_WIDTH / 2
     this.bitmap.originY = IMG_HEIGHT / 2
 		this.width = IMG_WIDTH / 2

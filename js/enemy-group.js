@@ -12,6 +12,7 @@ export default class EnemyGroup extends cax.Group {
   constructor () {
     super()
     this.preGenerateTime = Date.now()
+		this.initialTime = Date.now()
   }
 
   generate () {
@@ -24,7 +25,10 @@ export default class EnemyGroup extends cax.Group {
   update () {
     this.currentTime = Date.now()
     if (this.currentTime - this.preGenerateTime > 1000) {
-      this.generate()
+			var times = (this.currentTime - this.initialTime) / 5000
+			for (var i = 0; i < times; i++) {
+				this.generate()
+			}
 
       this.preGenerateTime = this.currentTime
     }
