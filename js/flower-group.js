@@ -13,8 +13,8 @@ export default class FlowerGroup extends cax.Group {
 	generateAll() {
 		for (var i = 0; i < 3; i++) {
 	    var e = new Flower(i)
-	    e.x = screenWidth / 3 * i
-	    e.y = screenHeight - e.height
+	    e.x = screenWidth / 3 * i + screenWidth / 3 / 2 + 5
+	    e.y = screenHeight - e.height - 80
 	    this.add(e)
 		}
 	}

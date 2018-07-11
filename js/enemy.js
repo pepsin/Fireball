@@ -4,6 +4,7 @@ const ENEMY_IMG_PREFIX = 'images/fire_'
 
 const IMG_WIDTH = 150
 const IMG_HEIGHT = 140
+const SCALE_RATIO = 0.4
 
 const info = wx.getSystemInfoSync()
 const screenWidth = info.windowWidth
@@ -18,7 +19,7 @@ export default class Enemy extends cax.Group {
     this.bitmap.originY = IMG_HEIGHT / 2
     this.add(this.bitmap)
 
-    this.scaleX = this.scaleY = 0.4
+    this.scaleX = this.scaleY = SCALE_RATIO
     this.speed = 1
 
     this.width = IMG_WIDTH / 2

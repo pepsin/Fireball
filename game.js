@@ -16,7 +16,7 @@ const music = new Music()
 const info = wx.getSystemInfoSync()
 const screenHeight = info.windowHeight
 
-stage.add(bg, enemyGroup, stoneGroup, flowerGroup)
+stage.add(bg, flowerGroup, stoneGroup, enemyGroup)
 
 // stage.add(player.bulletGroup)
 

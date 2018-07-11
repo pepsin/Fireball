@@ -4,6 +4,7 @@ const FLOWER_IMG_PREFIX = 'images/flower_'
 
 const IMG_WIDTH = 265
 const IMG_HEIGHT = 311
+const SCALE_RATIO = 0.4
 
 const info = wx.getSystemInfoSync()
 const screenWidth = info.windowWidth
@@ -13,12 +14,12 @@ export default class Flower extends cax.Group {
   constructor (index) {
     super()
     this.bitmap = new cax.Bitmap(FLOWER_IMG_PREFIX + index + ".png")
-    this.bitmap.originX = 0
+    this.bitmap.originX = IMG_WIDTH / 2
     this.bitmap.originY = IMG_HEIGHT / 2
     this.add(this.bitmap)
-    this.scaleX = this.scaleY = 0.4
+    this.scaleX = this.scaleY = SCALE_RATIO
     this.speed = 1
-    this.width = IMG_WIDTH / 2
-    this.height = IMG_WIDTH / 2
+    this.width = IMG_WIDTH / 2 * SCALE_RATIO
+    this.height = IMG_WIDTH / 2 * SCALE_RATIO
   }
 }
