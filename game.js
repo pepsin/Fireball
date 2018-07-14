@@ -50,6 +50,7 @@ wx.onTouchEnd(function (e) {
 
 function replay() {
 	score = 0
+	gameEnd = false
 	if (stoneGroup.children.length == 0) {
 			stoneGroup.generate()
 	}

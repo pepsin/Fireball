@@ -39,6 +39,7 @@ export default class Stone extends cax.Group {
 		this.shootAngle = 0
 		this.rotationDeltaWhenFlying = 0
 		this.combo = 1
+		this.speedRatio = 1
   }
 	
 	shoot () {
@@ -52,6 +53,7 @@ export default class Stone extends cax.Group {
 			var x = Math.max(0, Math.min(screenWidth, this.x));
 			var y = Math.max(0, Math.min(screenHeight, this.y));
 			var theta = Math.atan((originY - y) / (originX - x))
+			this.speedRatio = Math.pow(Math.pow(originY - y, 2) + Math.pow(originX - x, 2), 0.5) / (screenHeight - originY) + 0.2
 			this.rotationDeltaWhenFlying = 1
 			//Range compensation
 			if (originX - x < 0) {
@@ -83,7 +85,7 @@ export default class Stone extends cax.Group {
 		if (this.isShoot) {			
 			this.frames += 1
 			var seconds = this.frames / 60
-			var speed = 16
+			var speed = 16 * this.speedRatio
 			var gravity = 10
 			this.speedX = Math.cos(this.shootAngle) * speed
 			this.speedY = Math.sin(this.shootAngle) * speed
