@@ -22,4 +22,22 @@ export default class Flower extends cax.Group {
     this.width = IMG_WIDTH / 2 * SCALE_RATIO
     this.height = IMG_WIDTH / 2 * SCALE_RATIO
   }
+	
+	catchFire () {
+		this.visible = false
+		this.destroy()
+	}
+	
+  isCollideWith (sp) {
+    let spX = sp.x + sp.width
+    let spY = sp.y + sp.height
+
+		if (this.x <= spX &&
+				this.x + this.width >= sp.x &&
+				this.y <= spY &&
+				this.y + this.height >= sp.y) {
+					return true
+		}
+		return false
+  }
 }

@@ -27,6 +27,7 @@ let touchMoved = false
 let touchMoveX = 0
 let touchMoveY = 0
 let score = 0
+let gameEnd = false
 
 wx.onTouchStart(function (e) {
 	isShoot = false
@@ -47,7 +48,21 @@ wx.onTouchEnd(function (e) {
 	isShoot = true
 })
 
+function replay() {
+	score = 0
+	if (stoneGroup.children.length == 0) {
+			stoneGroup.generate()
+	}
+	if (flowerGroup.children.length == 0) {
+		flowerGroup.generateAll()
+		flowerGroup.animateAll()
+	}
+}
+
 function update () {
+	if (gameEnd) {
+		return
+	}
   stage.update()
   bg.update()
 
@@ -81,8 +96,17 @@ function update () {
 	      }
 			}
 		})
+		flowerGroup.children.forEach(flower => {
+			if (flower.isCollideWith(enemy)) {
+				enemy.explode()
+				flower.catchFire()
+			}
+		})
   })
-	console.log("Score: " + score)
+	
+	if (flowerGroup.children.length == 0) {
+		gameEnd = true
+	}
   requestAnimationFrame(update)
 }
 
