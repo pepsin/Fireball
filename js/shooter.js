@@ -41,32 +41,16 @@ export default class Shooter extends cax.Group {
 		this.combo = 1
 		this.speedRatio = 1
   }
-	
-	shoot () {
-		if (this.x - originX == 0 &&
-				this.y - originY == 0) {
-			return false
-		}
-		this.isShoot = true
-		
-		if (this.shootAngle == 0) {
-			var x = Math.max(0, Math.min(screenWidth, this.x));
-			var y = Math.max(0, Math.min(screenHeight, this.y));
-			var theta = Math.atan((originY - y) / (originX - x))
-			this.speedRatio = Math.pow(Math.pow(originY - y, 2) + Math.pow(originX - x, 2), 0.5) / (screenHeight - originY) + 0.2
-			this.rotationDeltaWhenFlying = 1
-			//Range compensation
-			if (originX - x < 0) {
-				theta = Math.PI + theta
-				this.rotationDeltaWhenFlying = -1
-			}
-			this.shootAngle = theta
-		}
-		return true
-	}
 
   update () {
-
+		var x = Math.max(0, Math.min(screenWidth, this.x));
+		var y = Math.max(0, Math.min(screenHeight, this.y));
+		var theta = Math.atan((originY - y) / (originX - x))
+		console.log(theta / Math.PI / 2)
+		if (originX - x < 0) {
+			theta = Math.PI - theta
+		}
+		this.rotation = theta / Math.PI / 2 * 360
   }
 	
 	follow (stone) {

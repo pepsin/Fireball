@@ -86,8 +86,9 @@ function update () {
 		touchMoveY = 0
 	}
 	stoneGroup.update()
-  enemyGroup.update()
+  // enemyGroup.update()
 	shooter.follow(stoneGroup.current)
+	shooter.update()
 
   enemyGroup.children.forEach(enemy => {
 		stoneGroup.children.forEach(stone => {
