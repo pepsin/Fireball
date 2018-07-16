@@ -1,6 +1,7 @@
 import cax from './js/libs/cax'
 import Background from './js/background'
 import Stone from './js/stone'
+import Shooter from "./js/shooter"
 import EnemyGroup from './js/enemy-group'
 import StoneGroup from './js/stone-group'
 import FlowerGroup from './js/flower-group'
@@ -10,13 +11,14 @@ import Flower from './js/flower'
 const bg = new Background()
 const stoneGroup = new StoneGroup()
 const stage = new cax.Stage()
+const shooter = new Shooter()
 const flowerGroup = new FlowerGroup()
 const enemyGroup = new EnemyGroup()
 const music = new Music()
 const info = wx.getSystemInfoSync()
 const screenHeight = info.windowHeight
 
-stage.add(bg, flowerGroup, stoneGroup, enemyGroup)
+stage.add(bg, flowerGroup, stoneGroup, enemyGroup, shooter)
 
 // stage.add(player.bulletGroup)
 
@@ -61,9 +63,6 @@ function replay() {
 }
 
 function update () {
-	if (gameEnd) {
-		return
-	}
   stage.update()
   bg.update()
 
@@ -78,6 +77,9 @@ function update () {
 		flowerGroup.generateAll()
 		flowerGroup.animateAll()
 	}
+	if (gameEnd) {
+		return
+	}
 	if (touchMoved) {
 		stoneGroup.updateCurrentPosition(touchMoveX, touchMoveY)
 		touchMoveX = 0
@@ -85,6 +87,7 @@ function update () {
 	}
 	stoneGroup.update()
   enemyGroup.update()
+	shooter.follow(stoneGroup.current)
 
   enemyGroup.children.forEach(enemy => {
 		stoneGroup.children.forEach(stone => {

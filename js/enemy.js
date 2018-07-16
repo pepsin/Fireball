@@ -103,7 +103,9 @@ export default class Enemy extends cax.Group {
 			}
 		}
     if (this.y > screenHeight) {
-      this.destroy()
+			if (this.parent != NULL) {
+				this.destroy()
+			}
     }
   }
 }
