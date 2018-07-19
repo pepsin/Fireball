@@ -25,7 +25,7 @@ export default class EnemyGroup extends cax.Group {
   update () {
     this.currentTime = Date.now()
     if (this.currentTime - this.preGenerateTime > 1000) {
-			var times = (this.currentTime - this.initialTime) / 5000
+			var times = (this.currentTime - this.initialTime) / 20000
 			for (var i = 0; i < times; i++) {
 				this.generate()
 			}

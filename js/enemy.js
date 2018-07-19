@@ -110,8 +110,5 @@ export default class Enemy extends cax.Group {
 				this.destroy()
 			}
     }
-		if (this.y) {
-			
-		}
   }
 }

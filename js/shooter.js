@@ -11,8 +11,8 @@ const originY = screenHeight / 3 * 2
 
 // 玩家相关常量设置
 const SHOOTER_IMG = 'images/shooter.png'
-const IMG_WIDTH = 301
-const IMG_HEIGHT = 194
+const IMG_WIDTH = 200
+const IMG_HEIGHT = 129
 
 export default class Shooter extends cax.Group {
   constructor (ctx) {

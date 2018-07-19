@@ -66,11 +66,12 @@ export default class Stone extends cax.Group {
 	}
 	
 	destroyIfNeeded () {
-		var destroyPadding = 200
+		var destroyPadding = 100
+		console.log(this.y)
 		if (this.isShoot) {
 	    if (this.y > (screenHeight + destroyPadding) ||
 					this.x > (screenWidth + destroyPadding) ||
-				  this.x < -destroyPadding) {
+				  this.x < -destroyPadding || this.y < -destroyPadding) {
 	      this.destroy()
 	    }
 		}
