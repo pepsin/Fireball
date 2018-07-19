@@ -55,6 +55,14 @@ export default class Shooter extends cax.Group {
 		this.rotation = 270 + theta / Math.PI / 2 * 360
   }
 	
+	pointLeft () {
+		var originalPointLeft = [29, 35]
+	}
+	
+	pointRight () {
+		var originalPointRight = [163, 35]
+	}
+	
 	follow (stone) {
 		this.stone = stone
 	}
