@@ -19,7 +19,7 @@ const info = wx.getSystemInfoSync()
 const screenHeight = info.windowHeight
 
 stage.add(bg, flowerGroup, stoneGroup, enemyGroup, shooter)
-
+initStone()
 // stage.add(player.bulletGroup)
 
 let touchX = null
@@ -30,6 +30,7 @@ let touchMoveX = 0
 let touchMoveY = 0
 let score = 0
 let gameEnd = false
+let STONE_REFRESH_TIME = 300
 
 wx.onTouchStart(function (e) {
 	isShoot = false
@@ -62,17 +63,24 @@ function replay() {
 	}
 }
 
+function initStone() {
+	if (stoneGroup.children.length == 0) {
+			stoneGroup.generate()
+	}
+	shooter.follow(stoneGroup.current)
+}
+
 function update () {
   stage.update()
   bg.update()
 
 	if (isShoot) {
+		shooter.follow(stoneGroup.current)
 		stoneGroup.shoot()
 		isShoot = false
+		setInterval(initStone, STONE_REFRESH_TIME)
 	}
-	if (stoneGroup.children.length == 0) {
-			stoneGroup.generate()
-	}
+	
 	if (flowerGroup.children.length == 0) {
 		flowerGroup.generateAll()
 		flowerGroup.animateAll()
@@ -86,8 +94,7 @@ function update () {
 		touchMoveY = 0
 	}
 	stoneGroup.update()
-  // enemyGroup.update()
-	shooter.follow(stoneGroup.current)
+  enemyGroup.update()
 	shooter.update()
 
   enemyGroup.children.forEach(enemy => {

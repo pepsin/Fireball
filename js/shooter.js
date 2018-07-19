@@ -1,6 +1,7 @@
 import cax from './libs/cax'
 import Bullet from './bullet'
 import Music from './music'
+import Stone from './stone'
 
 const info = wx.getSystemInfoSync()
 const screenWidth = info.windowWidth
@@ -29,32 +30,32 @@ export default class Shooter extends cax.Group {
     this.y = originY
 
     this.scaleX = this.scaleY = 0.5
-
-    this.preShootTime = Date.now()
-    this.bulletGroup = new cax.Group()
-		this.isShoot = false
-		this.frames = 0
-		this.speedX = 0
-		this.speedY = 0
-		this.shootAngle = 0
-		this.rotationDeltaWhenFlying = 0
-		this.combo = 1
-		this.speedRatio = 1
   }
 
   update () {
+		if (this.stone) {
+			this.x = this.stone.x
+			this.y = this.stone.y
+		}
 		var x = Math.max(0, Math.min(screenWidth, this.x));
 		var y = Math.max(0, Math.min(screenHeight, this.y));
 		var theta = Math.atan((originY - y) / (originX - x))
-		console.log(theta / Math.PI / 2)
-		if (originX - x < 0) {
-			theta = Math.PI - theta
+		if (originX - x == 0) {
+			if (originY - y >= 0) {
+				theta = Math.PI / 2
+			} else {
+				theta = 0
+			}
+		} else {
+			if (originX - x > 0) {
+					theta = theta + Math.PI
+			}
 		}
-		this.rotation = theta / Math.PI / 2 * 360
+		
+		this.rotation = 270 + theta / Math.PI / 2 * 360
   }
 	
 	follow (stone) {
-		this.x = stone.x
-		this.y = stone.y
+		this.stone = stone
 	}
 }

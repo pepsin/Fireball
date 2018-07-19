@@ -85,6 +85,9 @@ export default class Enemy extends cax.Group {
     const es = new cax.Sprite(this.spriteOption)
     es.x = this.x - 32
     es.y = this.y - 24
+		if (this.parent == null) {
+			return
+		}
     this.parent.parent.add(es)
 		this.destroy()
   }
@@ -103,9 +106,12 @@ export default class Enemy extends cax.Group {
 			}
 		}
     if (this.y > screenHeight) {
-			if (this.parent != NULL) {
+			if (this.parent != null) {
 				this.destroy()
 			}
     }
+		if (this.y) {
+			
+		}
   }
 }
