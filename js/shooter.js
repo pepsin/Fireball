@@ -17,8 +17,6 @@ const IMG_HEIGHT = 129
 export default class Shooter extends cax.Group {
   constructor (ctx) {
     super()
-    this.music = new Music()
-		var index = Math.ceil(Math.random() * 10000) % 3
     this.bitmap = new cax.Bitmap(SHOOTER_IMG)
     this.bitmap.originX = IMG_WIDTH / 2
     this.bitmap.originY = IMG_HEIGHT / 2
@@ -56,11 +54,11 @@ export default class Shooter extends cax.Group {
   }
 	
 	pointLeft () {
-		var originalPointLeft = [29, 35]
+		return [this.x - this.width / 2 + 29, this.y - this.height / 2+ 35]
 	}
 	
 	pointRight () {
-		var originalPointRight = [163, 35]
+		return [this.x - this.width / 2 + 80, this.y - this.height / 2 + 35]
 	}
 	
 	follow (stone) {

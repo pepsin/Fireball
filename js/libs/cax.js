@@ -4702,7 +4702,7 @@ var Polygon = function (_Shape) {
       // 路径闭合
       //  if (this.options.strokeStyle) {
       //    this.strokeStyle = strokeStyle;
-      // this.lineWidth(this.options.width);
+      this.lineWidth(this.options.strokeWidth);
       // this.lineJoin('round');
       // this.stroke();
       //  }
