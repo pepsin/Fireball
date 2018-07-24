@@ -96,7 +96,7 @@ function update () {
 		touchMoveY = 0
 	}
 	stoneGroup.update()
-  enemyGroup.update()
+  // enemyGroup.update()
 	shooter.update()
 	spring.update()
 

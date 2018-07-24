@@ -40,10 +40,15 @@ export default class ShooterSpring extends cax.Group {
 		}
 		var smallCap = 20
 		var leadingS1 = shooter.pointLeft()
+		var trailingS1 = shooter.pointRight()
+		if (leadingS1[0] > trailingS1[0]) {
+			var a = leadingS1
+			leadingS1 = trailingS1
+			trailingS1 = a
+		}
 		leadingS1[1] -= this.y
 		var leadingS2 = leadingS1
 		leadingS2[1] += smallCap
-		var trailingS1 = shooter.pointRight()
 		trailingS1[1] -= this.y
 		var trailingS2 = trailingS1
 		trailingS2[1] += smallCap

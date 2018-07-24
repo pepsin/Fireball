@@ -53,12 +53,24 @@ export default class Shooter extends cax.Group {
 		this.rotation = 270 + theta / Math.PI / 2 * 360
   }
 	
+	transform(point) {
+		var a = this.rotation / 360 * Math.PI * 2
+		var x = this.width / 2
+		var y = this.height / 2
+		var t = [Math.cos(a), Math.sin(a), -Math.sin(a), Math.cos(a), x - x * Math.cos(a) + y * Math.sin(a),y - x * Math.sin(a) - y * Math.cos(a)];
+		x = point[0] * t[0] + point[1] * t[2] + t[4]
+		y = point[0] * t[1] + point[1] * t[3] + t[5]
+		return [x, y]
+	}
+	
 	pointLeft () {
-		return [this.x - this.width / 2 + 29, this.y - this.height / 2+ 35]
+		var point = this.transform([29, 20])
+		return [this.x - this.width / 2 + point[0], this.y - this.height / 2 + point[1]]
 	}
 	
 	pointRight () {
-		return [this.x - this.width / 2 + 80, this.y - this.height / 2 + 35]
+		var point = this.transform([75, 20])
+		return [this.x - this.width / 2 + point[0], this.y - this.height / 2 + point[1]]
 	}
 	
 	follow (stone) {
