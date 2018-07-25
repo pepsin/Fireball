@@ -70,6 +70,7 @@ function initStone() {
 			stoneGroup.generate()
 	}
 	shooter.follow(stoneGroup.current)
+	shooter.update()
 }
 
 function update () {
@@ -80,7 +81,7 @@ function update () {
 		shooter.follow(stoneGroup.current)
 		stoneGroup.shoot()
 		isShoot = false
-		setInterval(initStone, STONE_REFRESH_TIME)
+		setTimeout(initStone, STONE_REFRESH_TIME)
 	}
 	
 	if (flowerGroup.children.length == 0) {

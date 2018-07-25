@@ -21,13 +21,18 @@ export default class Shooter extends cax.Group {
     this.bitmap.originX = IMG_WIDTH / 2
     this.bitmap.originY = IMG_HEIGHT / 2
 		this.width = IMG_WIDTH / 2
-		this.height = IMG_WIDTH / 2
+		this.height = IMG_HEIGHT / 2
 
-    this.add(this.bitmap)
     this.x = originX
     this.y = originY
-
+		
+		// var option = {
+		//    fillColor:"#ffffff66"
+		// }
+		// this.path = new cax.Polygon([[-this.width,-this.height], [-this.width, this.height], [this.width, this.height], [this.width, -this.height]], option)
+		// this.add(this.path)
     this.scaleX = this.scaleY = 0.5
+		this.add(this.bitmap)
   }
 
   update () {
@@ -57,20 +62,20 @@ export default class Shooter extends cax.Group {
 		var a = this.rotation / 360 * Math.PI * 2
 		var x = this.width / 2
 		var y = this.height / 2
-		var t = [Math.cos(a), Math.sin(a), -Math.sin(a), Math.cos(a), x - x * Math.cos(a) + y * Math.sin(a),y - x * Math.sin(a) - y * Math.cos(a)];
+		var t = [Math.cos(a), Math.sin(a), -Math.sin(a), Math.cos(a), 0,0]//x - x * Math.cos(a) + y * Math.sin(a),y - x * Math.sin(a) - y * Math.cos(a)]
 		x = point[0] * t[0] + point[1] * t[2] + t[4]
 		y = point[0] * t[1] + point[1] * t[3] + t[5]
 		return [x, y]
 	}
 	
 	pointLeft () {
-		var point = this.transform([29, 20])
-		return [this.x - this.width / 2 + point[0], this.y - this.height / 2 + point[1]]
+		var point = this.transform([35, -10])
+		return [this.x + point[0], this.y + point[1]]
 	}
 	
 	pointRight () {
-		var point = this.transform([75, 20])
-		return [this.x - this.width / 2 + point[0], this.y - this.height / 2 + point[1]]
+		var point = this.transform([-35, -10])
+		return [this.x + point[0], this.y + point[1]]
 	}
 	
 	follow (stone) {
