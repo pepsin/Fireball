@@ -1,7 +1,6 @@
 import cax from './js/libs/cax'
 import Background from './js/background'
 import Stone from './js/stone'
-import Shooter from "./js/shooter"
 import ShooterSpring from "./js/shooter-spring.js"
 import EnemyGroup from './js/enemy-group'
 import StoneGroup from './js/stone-group'
@@ -12,7 +11,6 @@ import Flower from './js/flower'
 const bg = new Background()
 const stoneGroup = new StoneGroup()
 const stage = new cax.Stage()
-const shooter = new Shooter()
 const spring = new ShooterSpring()
 const flowerGroup = new FlowerGroup()
 const enemyGroup = new EnemyGroup()
@@ -20,8 +18,7 @@ const music = new Music()
 const info = wx.getSystemInfoSync()
 const screenHeight = info.windowHeight
 
-spring.follow(shooter)
-stage.add(bg, flowerGroup, stoneGroup, enemyGroup, spring, shooter)
+stage.add(bg, flowerGroup, stoneGroup, enemyGroup, spring)
 initStone()
 
 let touchX = null
@@ -69,8 +66,6 @@ function initStone() {
 	if (stoneGroup.children.length == 0) {
 			stoneGroup.generate()
 	}
-	shooter.follow(stoneGroup.current)
-	shooter.update()
 }
 
 function update () {
@@ -78,7 +73,6 @@ function update () {
   bg.update()
 
 	if (isShoot) {
-		shooter.follow(stoneGroup.current)
 		stoneGroup.shoot()
 		isShoot = false
 		setTimeout(initStone, STONE_REFRESH_TIME)
@@ -98,7 +92,6 @@ function update () {
 	}
 	stoneGroup.update()
   // enemyGroup.update()
-	shooter.update()
 	spring.update()
 
   enemyGroup.children.forEach(enemy => {

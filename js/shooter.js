@@ -26,11 +26,6 @@ export default class Shooter extends cax.Group {
     this.x = originX
     this.y = originY
 		
-		// var option = {
-		//    fillColor:"#ffffff66"
-		// }
-		// this.path = new cax.Polygon([[-this.width,-this.height], [-this.width, this.height], [this.width, this.height], [this.width, -this.height]], option)
-		// this.add(this.path)
     this.scaleX = this.scaleY = 0.5
 		this.add(this.bitmap)
   }
