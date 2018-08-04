@@ -29,22 +29,31 @@ export default class Number extends cax.Group {
 		this.bitmaps = []
 		var width = 0
 		var height = 0
+		var ratio = 0.5
 		for (var i = 0; i < numStr.length; i++) {
 			let n = numStr[i]
-			let size = numSizes[n]
+			var size = numSizes[n]
+			size = [size[0] * ratio, size[1] * ratio]
 			let bitmap = new cax.Bitmap(NUMBER_IMG_PREFIX + n + ".png")
-			var padding = 6
+			var padding = 1
 			if (i == 0) {
 				padding = 0
 			}
-			bitmap.originX = size[0] / 2
-			bitmap.originY = size[1] / 2
+			bitmap.x = width + size[0]
+			bitmap.y = 0
 			this.add(bitmap)
 			width += (size[0] + padding)
 			height = Math.max(size[1], height)
+			bitmap.scaleX = ratio
+			bitmap.scaleY = ratio
 		}
 		
-		this.width = width 
+		this.width = width
 		this.height = height
   }
+	
+	update() {
+		this.alpha -= (1 / 60)
+		this.y -= 10 / 60
+	}
 }

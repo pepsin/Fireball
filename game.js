@@ -7,6 +7,7 @@ import StoneGroup from './js/stone-group'
 import FlowerGroup from './js/flower-group'
 import Music from './js/music'
 import Flower from './js/flower'
+import NumberGroup from './js/number-group'
 
 const bg = new Background()
 const stoneGroup = new StoneGroup()
@@ -14,11 +15,12 @@ const stage = new cax.Stage()
 const spring = new ShooterSpring()
 const flowerGroup = new FlowerGroup()
 const enemyGroup = new EnemyGroup()
+const numbers = new NumberGroup()
 const music = new Music()
 const info = wx.getSystemInfoSync()
 const screenHeight = info.windowHeight
 
-stage.add(bg, flowerGroup, spring, stoneGroup, enemyGroup)
+stage.add(bg, flowerGroup, spring, stoneGroup, enemyGroup, numbers)
 initStone()
 spring.holePoints = bg.holePoints()
 
@@ -97,13 +99,16 @@ function update () {
 	stoneGroup.update()
   enemyGroup.update()
 	spring.update()
+	numbers.update()
 
   enemyGroup.children.forEach(enemy => {
 		stoneGroup.children.forEach(stone => {
 			if (stone.isShoot) {
 	      if (stone.isCollideWith(enemy)) {
+					let s = 100 * stone.combo
+					numbers.generate(enemy, s)
 	        enemy.explode()
-					score += 10 * stone.combo
+					score += s
 					stone.combo += 1
 	        music.playExplosion()
 	      }
