@@ -79,7 +79,7 @@ function update () {
 	if (isShoot) {
 		stoneGroup.shoot()
 		isShoot = false
-		setTimeout(initStone, STONE_REFRESH_TIME)
+		initStone()
 	}
 	
 	if (flowerGroup.children.length == 0) {

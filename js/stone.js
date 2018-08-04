@@ -44,7 +44,7 @@ export default class Stone extends cax.Group {
 	setInitPoint(point) {
 		this.vertex = point
 		this.x = point[0] - this.width / 2
-		this.y = point[1] + 100
+		this.y = point[1]
 		this.initPoint = [this.x, this.y]
 	}
 	
@@ -59,8 +59,7 @@ export default class Stone extends cax.Group {
 			var x = Math.max(0, Math.min(screenWidth, this.x));
 			var y = Math.max(0, Math.min(screenHeight, this.y));
 			var theta = Math.atan((this.vertex[1] - y) / (this.vertex[0] - x))
-			this.speedRatio = Math.pow(Math.pow(this.vertex[1] - y, 2) + Math.pow(this.vertex[0] - x, 2), 0.5) / (screenHeight - initY) + 0.5
-			console.log(this.speedRatio)
+			this.speedRatio = Math.pow(Math.pow(this.vertex[1] - y, 2) + Math.pow(this.vertex[0] - x, 2), 0.5) / (screenHeight - initY) + 0.2
 			this.rotationDeltaWhenFlying = 1
 			//Range compensation
 			if (initX - x < 0) {

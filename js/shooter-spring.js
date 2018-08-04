@@ -30,8 +30,8 @@ export default class ShooterSpring extends cax.Group {
 			this.pathB.destroy()
 		}
 		var option = {
-		   strokeColor: "#FFEF86",
-			 strokeWidth: 3
+		  strokeColor: "#FFEF86",
+			strokeWidth: 4
 		}
 		
 		var points = this.replaceIfNeeded(stone.pointLeft(), stone.pointRight(), 0)
