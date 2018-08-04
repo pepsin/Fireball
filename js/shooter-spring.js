@@ -13,14 +13,14 @@ export default class ShooterSpring extends cax.Group {
 		this.width = screenWidth
 		this.height = screenHeight / 3 * 2
 		this.x = 0
-		this.y = screenHeight / 3
+		this.y = 0
 		this.pathA = 0
 		this.pathB = 0
   }
 
   update () {
-		var shooter = this.shooter
-		if (shooter == undefined) {
+		var stone = this.stone
+		if (stone == undefined) {
 			return
 		}
 		if (this.pathA != 0) {
@@ -29,35 +29,17 @@ export default class ShooterSpring extends cax.Group {
 		if (this.pathB != 0) {
 			this.pathB.destroy()
 		}
-		var leadingP1 = [0, 0]
-		var leadingP2 = [0, 15]
-		var trailingP1 = [this.width, 0]
-		var trailingP2 = [this.width, 15]
 		var option = {
-		   fillColor:"#ef8e34",
-		   strokeColor: "#8b4b45",
-			strokeWidth: 3
+		   strokeColor: "#FFEF86",
+			 strokeWidth: 3
 		}
 		
-		var points = this.replaceIfNeeded(shooter.pointLeft(), shooter.pointRight(), 0)
-		var leadingS1 = points[0]
-		var trailingS1 = points[1]
-		var smallCap = 10
-		leadingS1[1] -= this.y
-		var leadingS2 = [leadingS1[0], leadingS1[1]]
-		leadingS2[1] -= smallCap
-		var leadingPoints = this.replaceIfNeeded(leadingS1, leadingS2, 1)
-		leadingS1 = leadingPoints[1]
-		leadingS2 = leadingPoints[0]
-		trailingS1[1] -= this.y
-		var trailingS2 = [trailingS1[0], trailingS1[1]]
-		trailingS2[1] -= smallCap
-		var trailingPoints = this.replaceIfNeeded(trailingS1, trailingS2, 1)
-		trailingS1 = trailingPoints[1]
-		trailingS2 = trailingPoints[0]
-		this.pathA = new cax.Polygon([leadingP1, leadingP2, leadingS1, leadingS2], option)
+		var points = this.replaceIfNeeded(stone.pointLeft(), stone.pointRight(), 0)
+		points[0][1] -= this.y
+		points[1][1] -= this.y
+		this.pathA = new cax.Polygon([points[0], this.holePoints[0]], option)
 		this.add(this.pathA)
-		this.pathB = new cax.Polygon([trailingP1, trailingP2, trailingS1, trailingS2], option)
+		this.pathB = new cax.Polygon([points[1], this.holePoints[1]], option)
 		this.add(this.pathB)
   }
 	
@@ -69,8 +51,7 @@ export default class ShooterSpring extends cax.Group {
 		}
 	}
 	
-	follow (shooter) {
-		this.shooter = shooter
-		
+	follow (stone) {
+		this.stone = stone
 	}
 }

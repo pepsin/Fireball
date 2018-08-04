@@ -18,8 +18,9 @@ const music = new Music()
 const info = wx.getSystemInfoSync()
 const screenHeight = info.windowHeight
 
-stage.add(bg, flowerGroup, stoneGroup, enemyGroup, spring)
+stage.add(bg, flowerGroup, spring, stoneGroup, enemyGroup)
 initStone()
+spring.holePoints = bg.holePoints()
 
 let touchX = null
 let touchY = null
@@ -66,6 +67,8 @@ function initStone() {
 	if (stoneGroup.children.length == 0) {
 			stoneGroup.generate()
 	}
+	stoneGroup.current.originPoint = bg.originPoint()
+	spring.follow(stoneGroup.current)
 }
 
 function update () {

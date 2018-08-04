@@ -6,7 +6,7 @@ const info = wx.getSystemInfoSync()
 const screenWidth = info.windowWidth
 const screenHeight = info.windowHeight
 const originX = screenWidth / 2
-const originY = screenHeight / 3 * 2
+const originY = screenHeight / 7 * 3
 
 // 玩家相关常量设置
 const PLAYER_IMG_PREFIX = 'images/stone_'
@@ -52,8 +52,8 @@ export default class Stone extends cax.Group {
 		if (this.shootAngle == 0) {
 			var x = Math.max(0, Math.min(screenWidth, this.x));
 			var y = Math.max(0, Math.min(screenHeight, this.y));
-			var theta = Math.atan((originY - y) / (originX - x))
-			this.speedRatio = Math.pow(Math.pow(originY - y, 2) + Math.pow(originX - x, 2), 0.5) / (screenHeight - originY) + 0.2
+			var theta = Math.atan((this.originPoint[1] - y) / (this.originPoint[0] - x))
+			this.speedRatio = Math.pow(Math.pow(this.originPoint[1] - y, 2) + Math.pow(this.originPoint[0] - x, 2), 0.5) / (screenHeight - originY) + 0.2
 			this.rotationDeltaWhenFlying = 1
 			//Range compensation
 			if (originX - x < 0) {
@@ -109,4 +109,12 @@ export default class Stone extends cax.Group {
 		}
 		return false
   }
+	
+	pointLeft () {
+		return [this.x - this.width / 2 + 5, this.y]
+	}
+	
+	pointRight () {
+		return [this.x + this.width / 2 - 5, this.y]
+	}
 }

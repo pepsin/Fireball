@@ -36,4 +36,21 @@ export default class BackGround extends cax.Group {
   update () {
 
   }
+	
+	holePoints() {
+		var points = [[13, 16], [144, 23]]
+		for (var i = 0; i < points.length; i++) {
+			points[i][0] = points[i][0] * this.stand.scaleX
+			points[i][1] = points[i][1] * this.stand.scaleY
+			points[i][0] += this.stand.x
+			points[i][1] += this.stand.y
+		}
+		return points
+	}
+	
+	originPoint() {
+		var points = this.holePoints()
+		var point = [(points[0][0] + points[1][0]) / 2, (points[0][1] + points[1][1]) / 2]
+		return point
+	}
 }
