@@ -5,8 +5,8 @@ import Music from './music'
 const info = wx.getSystemInfoSync()
 const screenWidth = info.windowWidth
 const screenHeight = info.windowHeight
-const originX = screenWidth / 2
-const originY = screenHeight / 7 * 3
+const initX = screenWidth / 2
+const initY = screenHeight / 7 * 3
 
 // 玩家相关常量设置
 const PLAYER_IMG_PREFIX = 'images/stone_'
@@ -19,17 +19,15 @@ export default class Stone extends cax.Group {
     this.music = new Music()
 		var index = Math.ceil(Math.random() * 10000) % 3
     this.bitmap = new cax.Bitmap(PLAYER_IMG_PREFIX + index + ".png")
-    this.bitmap.originX = IMG_WIDTH / 2
-    this.bitmap.originY = IMG_HEIGHT / 2
+    this.bitmap.initX = IMG_WIDTH / 2
+    this.bitmap.initY = IMG_HEIGHT / 2
 		this.width = IMG_WIDTH / 2
 		this.height = IMG_WIDTH / 2
 
     this.add(this.bitmap)
-    this.x = originX
-    this.y = originY
-
     this.scaleX = this.scaleY = 0.5
-
+		this.x = -100
+    this.y = -100
     this.preShootTime = Date.now()
     this.bulletGroup = new cax.Group()
 		this.isShoot = false
@@ -40,11 +38,19 @@ export default class Stone extends cax.Group {
 		this.rotationDeltaWhenFlying = 0
 		this.combo = 1
 		this.speedRatio = 1
+		this.alpah = 0
   }
 	
+	setInitPoint(point) {
+		this.vertex = point
+		this.x = point[0] - this.width / 2
+		this.y = point[1] + 100
+		this.initPoint = [this.x, this.y]
+	}
+	
 	shoot () {
-		if (this.x - originX == 0 &&
-				this.y - originY == 0) {
+		if (this.x - this.initPoint[0] == 0 &&
+				this.y - this.initPoint[1] == 0) {
 			return false
 		}
 		this.isShoot = true
@@ -52,11 +58,12 @@ export default class Stone extends cax.Group {
 		if (this.shootAngle == 0) {
 			var x = Math.max(0, Math.min(screenWidth, this.x));
 			var y = Math.max(0, Math.min(screenHeight, this.y));
-			var theta = Math.atan((this.originPoint[1] - y) / (this.originPoint[0] - x))
-			this.speedRatio = Math.pow(Math.pow(this.originPoint[1] - y, 2) + Math.pow(this.originPoint[0] - x, 2), 0.5) / (screenHeight - originY) + 0.2
+			var theta = Math.atan((this.vertex[1] - y) / (this.vertex[0] - x))
+			this.speedRatio = Math.pow(Math.pow(this.vertex[1] - y, 2) + Math.pow(this.vertex[0] - x, 2), 0.5) / (screenHeight - initY) + 0.5
+			console.log(this.speedRatio)
 			this.rotationDeltaWhenFlying = 1
 			//Range compensation
-			if (originX - x < 0) {
+			if (initX - x < 0) {
 				theta = Math.PI + theta
 				this.rotationDeltaWhenFlying = -1
 			}
@@ -111,10 +118,10 @@ export default class Stone extends cax.Group {
   }
 	
 	pointLeft () {
-		return [this.x - this.width / 2 + 5, this.y]
+		return [this.x + 5, this.y + this.height / 2]
 	}
 	
 	pointRight () {
-		return [this.x + this.width / 2 - 5, this.y]
+		return [this.x + this.width - 5, this.y + this.height / 2]
 	}
 }

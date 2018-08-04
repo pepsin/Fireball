@@ -10,7 +10,7 @@ const BG_HEIGHT = 1334
 
 const STAND_IMG_SRC = 'images/stand.png'
 const STAND_WIDTH = 167
-const STAND_HEIGHT = 900
+const STAND_HEIGHT = 600
 
 export default class BackGround extends cax.Group {
   constructor () {
@@ -23,12 +23,12 @@ export default class BackGround extends cax.Group {
 		
 		let ratio = 1 / 3
 		this.stand = new cax.Bitmap(STAND_IMG_SRC)
-		this.stand.width = STAND_WIDTH / 2 * ratio
-		this.stand.height = STAND_HEIGHT / 2 * ratio
-    this.stand.y = 130
-		this.stand.x = screenWidth / 2 - this.stand.width
+		this.stand.width = STAND_WIDTH * ratio
+		this.stand.height = STAND_HEIGHT * ratio
     this.stand.scaleX = ratio
     this.stand.scaleY = ratio
+		this.stand.x = screenWidth / 2 - this.stand.width / 2
+		this.stand.y = screenHeight - this.stand.height - 180
 
     this.add(this.bgUp, this.stand)
   }

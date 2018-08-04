@@ -67,8 +67,9 @@ function initStone() {
 	if (stoneGroup.children.length == 0) {
 			stoneGroup.generate()
 	}
-	stoneGroup.current.originPoint = bg.originPoint()
+	stoneGroup.current.setInitPoint(bg.originPoint())
 	spring.follow(stoneGroup.current)
+	stoneGroup.current.alpha = 1
 }
 
 function update () {
@@ -94,7 +95,7 @@ function update () {
 		touchMoveY = 0
 	}
 	stoneGroup.update()
-  // enemyGroup.update()
+  enemyGroup.update()
 	spring.update()
 
   enemyGroup.children.forEach(enemy => {
