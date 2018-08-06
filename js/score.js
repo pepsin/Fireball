@@ -1,6 +1,6 @@
 import cax from './libs/cax'
 
-const NUMBER_IMG_PREFIX = 'images/numbers/normal/'
+const NUMBER_IMG_PREFIX = 'images/numbers/score/'
 
 const SCALE_RATIO = 0.5
 
@@ -22,11 +22,20 @@ const numSizes = {
 	"9": [28, 38]
 }
 
-export default class Number extends cax.Group {
+export default class Score extends cax.Group {
   constructor (num) {
     super()
-    let numStr = "" + num
+		this.num = num
 		this.bitmaps = []
+  }
+		
+	updateBitmaps() {
+		for (var i = 0; i < this.bitmaps.length; i++) {
+			this.bitmaps[i].destroy()
+		}
+		this.bitmaps = []
+		
+		let numStr = "" + this.num
 		var width = 0
 		var height = 0
 		var ratio = SCALE_RATIO
@@ -46,14 +55,20 @@ export default class Number extends cax.Group {
 			height = Math.max(size[1], height)
 			bitmap.scaleX = ratio
 			bitmap.scaleY = ratio
+			this.bitmaps.push(bitmap)
 		}
 		
 		this.width = width
 		this.height = height
-  }
+		this.x = 0
+		this.y = 10
+	}
 	
-	update() {
-		this.alpha -= (1 / 60)
-		this.y -= 10 / 60
+	setScore(num) {
+		if (num == this.num) {
+			return
+		}
+		this.num = num
+		this.updateBitmaps()
 	}
 }

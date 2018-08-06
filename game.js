@@ -8,6 +8,7 @@ import FlowerGroup from './js/flower-group'
 import Music from './js/music'
 import Flower from './js/flower'
 import NumberGroup from './js/number-group'
+import Score from './js/score'
 
 const bg = new Background()
 const stoneGroup = new StoneGroup()
@@ -16,11 +17,12 @@ const spring = new ShooterSpring()
 const flowerGroup = new FlowerGroup()
 const enemyGroup = new EnemyGroup()
 const numbers = new NumberGroup()
+const scoreDisplay = new Score()
 const music = new Music()
 const info = wx.getSystemInfoSync()
 const screenHeight = info.windowHeight
 
-stage.add(bg, flowerGroup, spring, stoneGroup, enemyGroup, numbers)
+stage.add(bg, flowerGroup, spring, stoneGroup, enemyGroup, numbers, scoreDisplay)
 initStone()
 spring.holePoints = bg.holePoints()
 
@@ -111,6 +113,7 @@ function update () {
 					score += s
 					stone.combo += 1
 	        music.playExplosion()
+					scoreDisplay.setScore(score)
 	      }
 			}
 		})
