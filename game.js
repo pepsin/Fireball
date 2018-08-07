@@ -9,6 +9,11 @@ import Music from './js/music'
 import Flower from './js/flower'
 import NumberGroup from './js/number-group'
 import Score from './js/score'
+import Button from './js/button'
+
+const info = wx.getSystemInfoSync()
+const screenWidth = info.windowWidth
+const screenHeight = info.windowHeight
 
 const bg = new Background()
 const stoneGroup = new StoneGroup()
@@ -19,15 +24,14 @@ const enemyGroup = new EnemyGroup()
 const numbers = new NumberGroup()
 const scoreDisplay = new Score()
 const music = new Music()
-const info = wx.getSystemInfoSync()
-const pauseButton = new cax.Button({
+const pauseButton = new Button({
+	x: (screenWidth - 44) / 2,
+	y: 0,
   width: 44,
   height: 44,
-  text: "||",
-	font: "20px Arial",
-	borderRadius: 5
+	borderRadius: 5,
+	bgImage: ["images/pause.png", 30, 30]
 })
-const screenHeight = info.windowHeight
 
 stage.add(bg, flowerGroup, spring, stoneGroup, enemyGroup, numbers, scoreDisplay, pauseButton)
 scoreDisplay.setScore(0)
