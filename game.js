@@ -23,6 +23,7 @@ const info = wx.getSystemInfoSync()
 const screenHeight = info.windowHeight
 
 stage.add(bg, flowerGroup, spring, stoneGroup, enemyGroup, numbers, scoreDisplay)
+scoreDisplay.setScore(0)
 initStone()
 spring.holePoints = bg.holePoints()
 
@@ -57,6 +58,7 @@ wx.onTouchEnd(function (e) {
 
 function replay() {
 	score = 0
+	scoreDisplay.setScore(score)
 	gameEnd = false
 	if (stoneGroup.children.length == 0) {
 			stoneGroup.generate()
