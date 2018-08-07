@@ -20,9 +20,16 @@ const numbers = new NumberGroup()
 const scoreDisplay = new Score()
 const music = new Music()
 const info = wx.getSystemInfoSync()
+const pauseButton = new cax.Button({
+  width: 44,
+  height: 44,
+  text: "||",
+	font: "20px Arial",
+	borderRadius: 5
+})
 const screenHeight = info.windowHeight
 
-stage.add(bg, flowerGroup, spring, stoneGroup, enemyGroup, numbers, scoreDisplay)
+stage.add(bg, flowerGroup, spring, stoneGroup, enemyGroup, numbers, scoreDisplay, pauseButton)
 scoreDisplay.setScore(0)
 initStone()
 spring.holePoints = bg.holePoints()
@@ -36,6 +43,7 @@ let touchMoveY = 0
 let score = 0
 let gameEnd = false
 let STONE_REFRESH_TIME = 300
+let paused = false
 
 wx.onTouchStart(function (e) {
 	isShoot = false
@@ -79,6 +87,9 @@ function initStone() {
 }
 
 function update () {
+	if (paused) {
+		return
+	}
   stage.update()
   bg.update()
 

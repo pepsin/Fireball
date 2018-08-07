@@ -1,6 +1,5 @@
 import cax from './libs/cax'
 import Number from './number'
-import Enemy from './number'
 
 const info = wx.getSystemInfoSync()
 const screenWidth = info.windowWidth
