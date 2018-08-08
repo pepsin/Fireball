@@ -33,7 +33,17 @@ const pauseButton = new Button({
 	bgImage: ["images/pause.png", 30, 30]
 })
 
-stage.add(bg, flowerGroup, spring, stoneGroup, enemyGroup, numbers, scoreDisplay, pauseButton)
+const restartButton = new Button({
+	x: (screenWidth - 87) / 2,
+	y: (screenHeight - 87) / 2,
+  width: 87,
+  height: 87,
+	borderRadius: 5,
+	bgImage: ["images/restart.png", 87, 87]
+})
+restartButton.visible = false
+
+stage.add(bg, flowerGroup, spring, stoneGroup, enemyGroup, numbers, scoreDisplay, pauseButton, restartButton)
 scoreDisplay.setScore(0)
 initStone()
 spring.holePoints = bg.holePoints()
@@ -61,25 +71,15 @@ wx.onTouchMove(function (e) {
 	touchMoveY = e.touches[0].clientY - touchY
   touchX = e.touches[0].clientX
   touchY = e.touches[0].clientY
+  
 })
 
 wx.onTouchEnd(function (e) {
 	touchMoved = false
 	isShoot = true
+	restartButton.actIfNeeded([touchX, touchY])
+  pauseButton.actIfNeeded([touchX, touchY])
 })
-
-function replay() {
-	score = 0
-	scoreDisplay.setScore(score)
-	gameEnd = false
-	if (stoneGroup.children.length == 0) {
-			stoneGroup.generate()
-	}
-	if (flowerGroup.children.length == 0) {
-		flowerGroup.generateAll()
-		flowerGroup.animateAll()
-	}
-}
 
 function initStone() {
 	if (stoneGroup.children.length == 0) {
@@ -88,6 +88,39 @@ function initStone() {
 	stoneGroup.current.setInitPoint(bg.originPoint())
 	spring.follow(stoneGroup.current)
 	stoneGroup.current.alpha = 1
+}
+
+function replay() {
+	score = 0
+	scoreDisplay.setScore(score)
+  enemyGroup.reset()
+  stoneGroup.children.forEach(stone => {
+    stone.destroy()
+  })
+  flowerGroup.children.forEach(flower => {
+    flower.destroy()
+  })
+  numbers.children.forEach(number => {
+    number.destroy()
+  })
+  initStone()
+	
+	flowerGroup.generateAll()
+	flowerGroup.animateAll()
+	
+  gameEnd = false
+  update()
+}
+
+restartButton.action = function() {
+  gameEnd = false
+  restartButton.visible = false
+  replay()
+}
+
+pauseButton.action = function() {
+  paused = !paused
+  update()
 }
 
 function update () {
@@ -144,6 +177,7 @@ function update () {
 	
 	if (flowerGroup.children.length == 0) {
 		gameEnd = true
+    restartButton.visible = true
 	}
   requestAnimationFrame(update)
 }

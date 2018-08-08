@@ -89,6 +89,15 @@ class Button extends cax.Group {
     }
     return arr
   }
+  
+  actIfNeeded(point) {
+    if (point[0] >= this.x && point[0] <= this.x + this.width &&
+        point[1] >= this.y && point[1] <= this.y + this.height) {
+        if (this.action) {
+          this.action()
+        }
+    }
+  }
 }
 
 export default Button

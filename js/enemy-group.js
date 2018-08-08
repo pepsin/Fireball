@@ -37,4 +37,13 @@ export default class EnemyGroup extends cax.Group {
       child.update()
     })
   }
+  
+  reset() {
+    this.children.forEach(child => {
+      child.visible = false
+      child.destroy()
+    })
+    this.preGenerateTime = Date.now()
+		this.initialTime = Date.now()
+  }
 }

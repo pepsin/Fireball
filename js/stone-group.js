@@ -22,8 +22,10 @@ export default class StoneGroup extends cax.Group {
   }
 	
 	shoot () {
-		if (this.current.shoot()) {
-			this.generate()
+		if (this.current) {
+      if (this.current.shoot()) {
+        this.generate()
+      }
 		}
 	}
 
