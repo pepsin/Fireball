@@ -5,6 +5,7 @@ const ENEMY_IMG_PREFIX = 'images/fire_'
 const IMG_WIDTH = 150
 const IMG_HEIGHT = 140
 const SCALE_RATIO = 0.4
+const MIND_CHANGE_TIMES = 2
 
 const info = wx.getSystemInfoSync()
 const screenWidth = info.windowWidth
@@ -17,6 +18,8 @@ export default class Enemy extends cax.Group {
     this.bitmap = new cax.Bitmap(ENEMY_IMG_PREFIX + index + ".png")
     this.bitmap.originX = IMG_WIDTH / 2
     this.bitmap.originY = IMG_HEIGHT / 2
+    this.mindChangeTimes = MIND_CHANGE_TIMES
+    this.mindChangeZoneVariant = Math.ceil(Math.random() * 100000) % (screenHeight / 3)
     this.add(this.bitmap)
 
     this.scaleX = this.scaleY = SCALE_RATIO
@@ -109,6 +112,23 @@ export default class Enemy extends cax.Group {
 			if (this.parent != null) {
 				this.destroy()
 			}
+    }
+  }
+  
+  updateTarget(flowers) {
+    var separatorHeight = screenHeight / MIND_CHANGE_TIMES
+    var inChangeMindZone = this.y > (screenHeight + this.mindChangeZoneVariant - separatorHeight * this.mindChangeTimes) && this.y < (screenHeight + this.mindChangeZoneVariant - separatorHeight * (this.mindChangeTimes - 1))
+    if (this.mindChangeTimes > 0 && inChangeMindZone) {
+      var exist = []
+      for (var i = 0; i < flowers.children.length; i++) {
+        if (flowers.children[i].visible) {
+          exist.push(flowers.children[i])
+        }
+      }
+      var index = Math.ceil(Math.random() * 1000) % exist.length
+      var target = exist[index]
+      this.targetX = target.x
+      this.mindChangeTimes -= 1
     }
   }
 }

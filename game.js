@@ -173,6 +173,7 @@ function update () {
     restartButton.visible = true
 	}
   requestAnimationFrame(update)
+  enemyGroup.updateTargets(flowerGroup)
 }
 
 update()

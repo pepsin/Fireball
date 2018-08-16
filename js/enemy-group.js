@@ -43,4 +43,10 @@ export default class EnemyGroup extends cax.Group {
     this.preGenerateTime = Date.now()
 		this.initialTime = Date.now()
   }
+  
+  updateTargets(flowers) {
+    this.children.forEach(child => {
+      child.updateTarget(flowers)
+    })
+  }
 }
