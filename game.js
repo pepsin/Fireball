@@ -94,15 +94,9 @@ function replay() {
 	score = 0
 	scoreDisplay.setScore(score)
   enemyGroup.reset()
-  stoneGroup.children.forEach(stone => {
-    stone.destroy()
-  })
-  flowerGroup.children.forEach(flower => {
-    flower.destroy()
-  })
-  numbers.children.forEach(number => {
-    number.destroy()
-  })
+  stoneGroup.empty()
+  flowerGroup.empty()
+  numbers.empty()
   initStone()
 	
 	flowerGroup.generateAll()
@@ -113,7 +107,6 @@ function replay() {
 }
 
 restartButton.action = function() {
-  gameEnd = false
   restartButton.visible = false
   replay()
 }
