@@ -26,7 +26,7 @@ const scoreDisplay = new Score()
 const music = new Music()
 const pauseButton = new Button({
 	x: (screenWidth - 44) / 2,
-	y: 0,
+	y: info.statusBarHeight,
   width: 44,
   height: 44,
 	borderRadius: 5,
@@ -117,6 +117,7 @@ pauseButton.action = function() {
 }
 
 function update () {
+  console.log(info)
 	if (paused) {
 		return
 	}

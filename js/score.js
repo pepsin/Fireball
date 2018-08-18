@@ -61,7 +61,7 @@ export default class Score extends cax.Group {
 		this.width = width
 		this.height = height
 		this.x = 0
-		this.y = 10
+		this.y = info.statusBarHeight
 	}
 	
 	setScore(num) {
