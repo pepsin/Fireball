@@ -117,7 +117,6 @@ pauseButton.action = function() {
 }
 
 function update () {
-  console.log(info)
 	if (paused) {
 		return
 	}
