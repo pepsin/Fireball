@@ -7,6 +7,7 @@ const screenWidth = info.windowWidth
 const screenHeight = info.windowHeight
 const initX = screenWidth / 2
 const initY = screenHeight / 7 * 3
+const maxSpeed = screenHeight * 0.028
 
 // 玩家相关常量设置
 const PLAYER_IMG_PREFIX = 'images/stone_'
@@ -91,7 +92,7 @@ export default class Stone extends cax.Group {
 		if (this.isShoot) {			
 			this.frames += 1
 			var seconds = this.frames / 60
-			var speed = 16 * this.speedRatio
+			var speed = maxSpeed * this.speedRatio
 			var gravity = 10
 			this.speedX = Math.cos(this.shootAngle) * speed
 			this.speedY = Math.sin(this.shootAngle) * speed

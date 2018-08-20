@@ -10,6 +10,7 @@ const MIND_CHANGE_TIMES = 2
 const info = wx.getSystemInfoSync()
 const screenWidth = info.windowWidth
 const screenHeight = info.windowHeight
+const dropSpeed = screenHeight * 0.002
 
 export default class Enemy extends cax.Group {
   constructor () {
@@ -23,7 +24,7 @@ export default class Enemy extends cax.Group {
     this.add(this.bitmap)
 
     this.scaleX = this.scaleY = SCALE_RATIO
-    this.speed = 1
+    this.speed = dropSpeed
 
     this.width = IMG_WIDTH / 2
     this.height = IMG_WIDTH / 2
