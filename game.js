@@ -88,16 +88,22 @@ function replay() {
 }
 
 uiGroup.restartButton.action = function() {
-  restartButton.visible = false
+  uiGroup.restartButton.visible = false
   replay()
 }
 
 uiGroup.pauseButton.action = function() {
   paused = !paused
+  if (paused) {
+    uiGroup.pause()
+  } else {
+    uiGroup.start()
+  }
   update()
 }
 
 function update () {
+  uiGroup.update()
 	if (paused) {
 		return
 	}

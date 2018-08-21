@@ -31,13 +31,33 @@ function rnd (start, end) {
 export default class UIGroup extends cax.Group {
   constructor () {
     super()
-    this.add(pauseButton, restartButton)
     this.pauseButton = pauseButton
     this.restartButton = restartButton
+    this.coverBackground = new cax.Rect(screenWidth, screenHeight, {
+      fillStyle: "#000000aa"
+    })
+    this.coverBackground.visible = false
+    this.coverBackground.x = 0
+    this.coverBackground.y = 0
+    this.buttons = [pauseButton, restartButton]
+    this.add(pauseButton, this.coverBackground, restartButton)
   }
 	
   passEvent(points) {
-  	restartButton.actIfNeeded(points)
-    pauseButton.actIfNeeded(points)
+    for (var i = 0; i < this.buttons.length; i++) {
+      this.buttons[i].actIfNeeded(points)
+    }
+  }
+  
+  pause() {
+    this.coverBackground.visible = true
+  }
+  
+  start() {
+    this.coverBackground.visible = false
+  }
+  
+  update() {
+    
   }
 }
