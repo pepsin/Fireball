@@ -96,17 +96,15 @@ uiGroup.restartButton.action = function() {
 
 uiGroup.startButton.action = function() {
   paused = false
+  music.playBgm()
   uiGroup.start()
   update()
 }
 
 uiGroup.pauseButton.action = function() {
   paused = true
-  if (paused) {
-    uiGroup.pause()
-  } else {
-    uiGroup.start()
-  }
+  music.pauseBgm()
+  uiGroup.pause()
   update()
 }
 

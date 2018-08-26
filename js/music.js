@@ -11,19 +11,23 @@ export default class Music {
 
     this.bgmAudio = wx.createInnerAudioContext()
     this.bgmAudio.loop = true
-    this.bgmAudio.src = 'audio/bgm.mp3'
+    this.bgmAudio.src = 'audio/shamisen.mp3'
 
     this.shootAudio = wx.createInnerAudioContext()
     this.shootAudio.src = 'audio/bullet.mp3'
 
     this.boomAudio = wx.createInnerAudioContext()
-    this.boomAudio.src = 'audio/boom.mp3'
+    this.boomAudio.src = 'audio/hit.mp3'
 
     this.playBgm()
   }
 
   playBgm () {
     this.bgmAudio.play()
+  }
+  
+  pauseBgm() {
+    this.bgmAudio.pause()
   }
 
   playShoot () {
