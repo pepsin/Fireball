@@ -24,6 +24,16 @@ const restartButton = new Button({
 })
 restartButton.visible = false
 
+const startButton = new Button({
+	x: (screenWidth - 87) / 2,
+	y: (screenHeight - 87) / 2,
+  width: 87,
+  height: 87,
+	borderRadius: 5,
+	bgImage: ["images/start.png", 87, 87]
+})
+startButton.visible = false
+
 function rnd (start, end) {
   return Math.floor(Math.random() * (end - start) + start)
 }
@@ -33,28 +43,37 @@ export default class UIGroup extends cax.Group {
     super()
     this.pauseButton = pauseButton
     this.restartButton = restartButton
+    this.startButton = startButton
     this.coverBackground = new cax.Rect(screenWidth, screenHeight, {
       fillStyle: "#000000aa"
     })
     this.coverBackground.visible = false
     this.coverBackground.x = 0
     this.coverBackground.y = 0
-    this.buttons = [pauseButton, restartButton]
-    this.add(pauseButton, this.coverBackground, restartButton)
+    this.buttons = [pauseButton, restartButton, startButton]
+    this.add(pauseButton, this.coverBackground, restartButton, startButton)
   }
 	
   passEvent(points) {
     for (var i = 0; i < this.buttons.length; i++) {
-      this.buttons[i].actIfNeeded(points)
+      if (this.buttons[i].visible) {
+        this.buttons[i].actIfNeeded(points)
+      }
     }
   }
   
+  showBG(show) {
+    this.coverBackground.visible = show
+  }
+  
   pause() {
-    this.coverBackground.visible = true
+    this.showBG(true)
+    startButton.visible = true
   }
   
   start() {
-    this.coverBackground.visible = false
+    this.showBG(false)
+    startButton.visible = false
   }
   
   update() {

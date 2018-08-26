@@ -82,6 +82,7 @@ function replay() {
 	
 	flowerGroup.generateAll()
 	flowerGroup.animateAll()
+  uiGroup.showBG(false)
 	
   gameEnd = false
   paused = false
@@ -93,8 +94,14 @@ uiGroup.restartButton.action = function() {
   replay()
 }
 
+uiGroup.startButton.action = function() {
+  paused = false
+  uiGroup.start()
+  update()
+}
+
 uiGroup.pauseButton.action = function() {
-  paused = !paused
+  paused = true
   if (paused) {
     uiGroup.pause()
   } else {
@@ -158,7 +165,7 @@ function update () {
 	
 	if (flowerGroup.children.length == 0) {
 		gameEnd = true
-    uiGroup.pause()
+    uiGroup.showBG(true)
     uiGroup.restartButton.visible = true
 	}
   requestAnimationFrame(update)
