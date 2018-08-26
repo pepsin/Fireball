@@ -103,11 +103,11 @@ uiGroup.pauseButton.action = function() {
 }
 
 function update () {
+  stage.update()
   uiGroup.update()
 	if (paused) {
 		return
 	}
-  stage.update()
   bg.update()
 
 	if (isShoot) {
