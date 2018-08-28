@@ -15,9 +15,13 @@ export default class Music {
 
     this.shootAudio = wx.createInnerAudioContext()
     this.shootAudio.src = 'audio/bullet.mp3'
-
-    this.boomAudio = wx.createInnerAudioContext()
-    this.boomAudio.src = 'audio/hit.mp3'
+    
+    this.hitAudio = []
+    for (var i = 0; i < 7; i++) {
+      var boomAudio = wx.createInnerAudioContext()
+      boomAudio.src = 'audio/hit_' + i + '.mp3'
+      this.hitAudio.push boomAudio
+    }
 
     this.playBgm()
   }
@@ -36,7 +40,11 @@ export default class Music {
   }
 
   playExplosion () {
-    // this.boomAudio.currentTime = 0
-    this.boomAudio.play()
+    for (var i = 0; i < this.hitAudio.length; i++) {
+      if (this.hitAudio[i].paused) {
+        this.hitAudio[i].play()
+        break
+      }
+    }
   }
 }
