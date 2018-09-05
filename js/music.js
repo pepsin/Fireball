@@ -8,7 +8,7 @@ export default class Music {
     this.bgmAudio = wx.createInnerAudioContext()
     this.bgmAudio.loop = true
     this.bgmAudio.src = 'audio/shamisen.mp3'
-    this.bgmAudio.volume = 0.4
+    this.bgmAudio.volume = 0.3
 
     this.shootAudio = wx.createInnerAudioContext()
     this.shootAudio.src = 'audio/bullet.mp3'
