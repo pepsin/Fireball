@@ -1,8 +1,4 @@
 let instance
-
-/**
- * 统一的音效管理器
- */
 export default class Music {
   constructor () {
     if (instance) { return instance }
@@ -12,15 +8,16 @@ export default class Music {
     this.bgmAudio = wx.createInnerAudioContext()
     this.bgmAudio.loop = true
     this.bgmAudio.src = 'audio/shamisen.mp3'
+    this.bgmAudio.volume = 0.4
 
     this.shootAudio = wx.createInnerAudioContext()
     this.shootAudio.src = 'audio/bullet.mp3'
     
     this.hitAudio = []
-    for (var i = 0; i < 7; i++) {
+    for (var i = 0; i < 28; i++) {
       var boomAudio = wx.createInnerAudioContext()
-      boomAudio.src = 'audio/hit_' + i + '.mp3'
-      this.hitAudio.push boomAudio
+      boomAudio.src = 'audio/hit.mp3'
+      this.hitAudio.push(boomAudio)
     }
 
     this.playBgm()
