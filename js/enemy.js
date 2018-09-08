@@ -1,4 +1,5 @@
 import cax from './libs/cax'
+import util from './util'
 
 const ENEMY_IMG_PREFIX = 'images/fire_'
 
@@ -24,7 +25,7 @@ export default class Enemy extends cax.Group {
     this.add(this.bitmap)
 
     this.scaleX = this.scaleY = SCALE_RATIO
-    this.speed = dropSpeed
+    this.speed = dropSpeed + (Math.random() * 1000 / 1000 * 0.3 * dropSpeed)
 
     this.width = IMG_WIDTH / 2
     this.height = IMG_WIDTH / 2
@@ -128,8 +129,14 @@ export default class Enemy extends cax.Group {
       }
       var index = Math.ceil(Math.random() * 1000) % exist.length
       var target = exist[index]
-      this.targetX = target.x
-      this.mindChangeTimes -= 1
+      if (target) {
+        this.targetX = target.x
+        this.mindChangeTimes -= 1
+      }
     }
+  }
+  
+  empty() {
+    
   }
 }

@@ -13,11 +13,21 @@ export default class EnemyGroup extends cax.Group {
     super()
     this.preGenerateTime = Date.now()
 		this.initialTime = Date.now()
-    this.enemiesRecycleBin = []
+    this.recycleBin = []
   }
 
   generate () {
-    const e = new Enemy()
+    var e
+    if (this.recycleBin.length > 0) {
+      e = this.recycleBin.pop()
+      e.visible = true
+      console.log("Recycled + " + this.recycleBin.length)
+    } else {
+      if (this.recycleBin.length + this.children.length > 20) {
+        return
+      }
+      e = new Enemy()
+    }
     e.x = rnd(0, screenWidth)
     e.y = -60
     this.add(e)
@@ -59,6 +69,7 @@ export default class EnemyGroup extends cax.Group {
   					let s = 100 * stone.combo
   					numbersGroup.generate(enemy, s)
   	        enemy.explode()
+            this.recycleBin.push(enemy)
             stone.combo += 1
             explodedCall(s)
   	      }
