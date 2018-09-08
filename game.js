@@ -138,27 +138,11 @@ function update () {
   enemyGroup.update()
 	spring.update()
 	numbers.update()
-
-  enemyGroup.children.forEach(enemy => {
-		stoneGroup.children.forEach(stone => {
-			if (stone.isShoot) {
-	      if (stone.isCollideWith(enemy)) {
-					let s = 100 * stone.combo
-					numbers.generate(enemy, s)
-	        enemy.explode()
-					score += s
-					stone.combo += 1
-	        music.playExplosion()
-					scoreDisplay.setScore(score)
-	      }
-			}
-		})
-		flowerGroup.children.forEach(flower => {
-			if (flower.isCollideWith(enemy)) {
-				enemy.explode()
-				flower.catchFire()
-			}
-		})
+  
+  enemyGroup.interactWithStoneAndFlowers(stoneGroup, flowerGroup, numbers, function(newScore) {
+      music.playExplosion()
+      score += newScore
+			scoreDisplay.setScore(score)
   })
 	
 	if (flowerGroup.children.length == 0) {
@@ -167,7 +151,6 @@ function update () {
     uiGroup.restartButton.visible = true
 	}
   requestAnimationFrame(update)
-  enemyGroup.updateTargets(flowerGroup)
 }
 
 update()

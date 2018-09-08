@@ -13,6 +13,7 @@ export default class EnemyGroup extends cax.Group {
     super()
     this.preGenerateTime = Date.now()
 		this.initialTime = Date.now()
+    this.enemiesRecycleBin = []
   }
 
   generate () {
@@ -48,5 +49,29 @@ export default class EnemyGroup extends cax.Group {
     this.children.forEach(child => {
       child.updateTarget(flowers)
     })
+  }
+  
+  interactWithStoneAndFlowers(stoneGroup, flowerGroup, numbersGroup, explodedCall) {
+    this.children.forEach(enemy => {
+  		stoneGroup.children.forEach(stone => {
+  			if (stone.isShoot) {
+  	      if (stone.isCollideWith(enemy)) {
+  					let s = 100 * stone.combo
+  					numbersGroup.generate(enemy, s)
+  	        enemy.explode()
+            stone.combo += 1
+            explodedCall(s)
+  	      }
+  			}
+  		})
+  		flowerGroup.children.forEach(flower => {
+  			if (flower.isCollideWith(enemy)) {
+  				enemy.explode()
+  				flower.catchFire()
+  			}
+  		})
+    })
+    
+    this.updateTargets(flowerGroup)
   }
 }

@@ -11,7 +11,7 @@ const screenHeight = info.windowHeight
 //number info
 const numSizes = {
 	"0": [30, 38],
-	"1": [20, 38],
+	"1": [30, 38],
 	"2": [26, 36],
 	"3": [26, 36],
 	"4": [30, 38],
