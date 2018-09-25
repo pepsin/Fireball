@@ -1,6 +1,6 @@
 import cax from './libs/cax'
 
-const NUMBER_IMG_PREFIX = 'images/numbers/score/'
+const NUMBER_IMG_PREFIX = 'images/numbers/normal/'
 
 const SCALE_RATIO = 0.5
 
@@ -10,16 +10,16 @@ const screenHeight = info.windowHeight
 
 //number info
 const numSizes = {
-	"0": [30, 38],
-	"1": [20, 38],
-	"2": [26, 36],
-	"3": [26, 36],
+	"0": [28, 38],
+	"1": [17, 38],
+	"2": [25, 36],
+	"3": [27, 36],
 	"4": [30, 38],
-	"5": [28, 40],
-	"6": [28, 40],
-	"7": [30, 38],
-	"8": [28, 38],
-	"9": [28, 38]
+	"5": [26, 40],
+	"6": [25, 40],
+	"7": [26, 38],
+	"8": [25, 38],
+	"9": [24, 38]
 }
 
 export default class Score extends cax.Group {
@@ -44,10 +44,7 @@ export default class Score extends cax.Group {
 			var size = numSizes[n]
 			size = [size[0] * ratio, size[1] * ratio]
 			let bitmap = new cax.Bitmap(NUMBER_IMG_PREFIX + n + ".png")
-			var padding = 1
-			if (i == 0) {
-				padding = 0
-			}
+			var padding = 3
 			bitmap.x = width + size[0]
 			bitmap.y = 0
 			this.add(bitmap)
