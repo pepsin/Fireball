@@ -50,8 +50,9 @@ export default class Stone extends cax.Group {
 	}
 	
 	shoot () {
-		if (this.x - this.initPoint[0] == 0 &&
-				this.y - this.initPoint[1] == 0) {
+    var dx = this.x - this.initPoint[0]
+    var dy = this.y - this.initPoint[1]
+		if (Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2)) < 10) {
 			return false
 		}
 		this.isShoot = true
